@@ -1,0 +1,28 @@
+<div class="container-fluid">
+  <input
+    class="form-control"
+    type="text"
+    placeholder="Paste your URL"
+    [(ngModel)]="userUrl"
+  />
+
+  <div class="button-group">
+    <button class="btn btn-warning" (click)="showResponseUrl()">
+      Shorten URL
+    </button>
+    &nbsp;&nbsp;
+    <button class="btn btn-warning" (click)="onReset()">
+      Reset
+    </button>
+  </div>
+
+  <div *ngIf="!outputUrl && flag" class="spinner-border text-warning m-5" role="status">
+  </div>
+
+  <div class="card">
+    <div class="card-body" *ngIf="outputUrl">
+      {{outputUrl}}
+    </div>
+  </div>
+
+</div>

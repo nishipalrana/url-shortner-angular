@@ -1,0 +1,26 @@
+.container-fluid {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.button-group {
+  margin-top: 2rem;
+}
+
+.card {
+  margin: 5rem 0 0 0;
+}
+
+div.card:hover {
+  box-shadow: 0.2rem 0.2rem 1.2rem green;
+}

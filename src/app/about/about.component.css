@@ -1,0 +1,15 @@
+.container-fluid {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  width: 700px;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

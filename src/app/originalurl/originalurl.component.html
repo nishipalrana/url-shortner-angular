@@ -1,0 +1,29 @@
+<div class="container-fluid">
+  <input
+    class="form-control"
+    type="text"
+    placeholder="Paste your URL"
+    [(ngModel)]="userUrl"
+  />
+
+  <div class="button-group">
+    <button class="btn btn-success" (click)="showResponseUrl()">
+      Get Original URL
+    </button>
+    &nbsp;&nbsp;
+    <button class="btn btn-success" (click)="onReset()">
+      Reset
+    </button>
+  </div>
+  <div class="d-flex justify-content-center">
+    <div *ngIf="!outputUrl && flag" class="spinner-border text-success m-5" role="status">
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body" *ngIf="outputUrl">
+      {{outputUrl}}
+    </div>
+  </div>
+
+</div>
