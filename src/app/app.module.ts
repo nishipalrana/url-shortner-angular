@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 import { AppComponent } from './app.component';
 import { AppService } from './app.service';
@@ -25,6 +26,7 @@ const routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    ClipboardModule,
     RouterModule.forRoot(routes)
   ],
   declarations: [
