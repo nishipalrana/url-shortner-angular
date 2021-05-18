@@ -1,0 +1,11 @@
+.img {
+  width: 100%;
+  padding: 0 23rem 0 23rem;
+  height: 29rem;
+}
+
+p {
+  font-size: x-small;
+  text-align: right;
+  margin-right: 1rem;
+}

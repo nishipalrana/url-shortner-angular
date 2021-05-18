@@ -29,5 +29,5 @@ export class ShortenurlComponent {
     this.userUrl = '';
   }
 
-  constructor(private appService: AppService, private clipboard: Clipboard) {}
+  constructor(private appService: AppService) {}
 }
