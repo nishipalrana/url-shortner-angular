@@ -16,15 +16,13 @@
     </button>
   </div>
 
-  <div
-    *ngIf="!outputUrl && flag"
-    class="spinner-border text-warning m-5"
-    role="status"
-  ></div>
+  <div *ngIf="!outputUrl && flag" class="spinner-border text-warning m-5" role="status"></div>
 
   <div class="card">
     <div class="card-body" *ngIf="outputUrl">
       {{outputUrl}}
     </div>
+    <button (click)="onCopy()">Copy this</button>
   </div>
+
 </div>
