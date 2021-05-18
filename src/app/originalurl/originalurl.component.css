@@ -18,7 +18,17 @@
 }
 
 .card {
+  display: flex;
+  flex-direction: row;
   margin: 5rem 0 0 0;
+  height: 2.5rem;
+  width: 30rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h6 {
+  padding: 1.5rem 1rem 1rem 1rem;
 }
 
 div.card:hover {

@@ -14,6 +14,13 @@ export class OriginalurlComponent implements OnInit {
   outputUrl: string;
   flag: boolean = false;
 
+  onCopy() {
+    navigator.clipboard
+      .writeText(this.outputUrl)
+      .then()
+      .catch(e => console.error(e));
+  }
+
   onReset() {
     this.userUrl = '';
     this.outputUrl = '';

@@ -27,7 +27,8 @@ const routes = [
     FormsModule,
     HttpClientModule,
     ClipboardModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    
   ],
   declarations: [
     AppComponent,
