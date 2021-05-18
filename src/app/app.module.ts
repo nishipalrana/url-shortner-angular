@@ -15,7 +15,9 @@ const routes = [
   { path: 'home', component: HomeComponent },
   { path: 'shortenUrl', component: ShortenurlComponent },
   { path: 'originalUrl', component: OriginalurlComponent },
-  { path: 'about', component: AboutComponent }
+  { path: 'about', component: AboutComponent },
+  { path: '', component: HomeComponent },
+  { path: '**', component: HomeComponent }
 ];
 
 @NgModule({
