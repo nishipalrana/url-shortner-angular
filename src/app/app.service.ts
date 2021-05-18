@@ -23,7 +23,8 @@ export class AppService {
   }
 
   getOriginalUrl(userUrl: string): Observable<OriginalUrlResponse> {
-    let code = 'Gp44lr';
+    let code = userUrl.substring(userUrl.lastIndexOf('/') + 1);
+    console.log(code);
 
     const options = code ? { params: new HttpParams().set('code', code) } : {};
     return this.http.get<OriginalUrlResponse>(this.baseUrl + 'info', options);
