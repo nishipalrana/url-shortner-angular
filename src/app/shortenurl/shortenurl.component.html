@@ -6,6 +6,10 @@
     [(ngModel)]="userUrl"
   />
 
+  <div class="alert alert-warning" role="alert" *ngIf="errorFlag">
+    {{errorMessage}}
+  </div>
+
   <div class="button-group">
     <button class="btn btn-warning" (click)="showResponseUrl()">
       Shorten URL

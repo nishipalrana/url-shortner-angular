@@ -13,6 +13,8 @@ export class OriginalurlComponent implements OnInit {
   response: OriginalUrlResponse;
   outputUrl: string;
   flag: boolean = false;
+  errorFlag: boolean = false;
+  errorMessage: string;
 
   onCopy() {
     navigator.clipboard
@@ -25,13 +27,22 @@ export class OriginalurlComponent implements OnInit {
     this.userUrl = '';
     this.outputUrl = '';
     this.flag = false;
+    this.errorFlag = false;
   }
 
   showResponseUrl() {
     this.flag = true;
-    this.appService.getOriginalUrl(this.userUrl).subscribe(data => {
-      this.response = data;
-      this.outputUrl = this.response.result.url;
+    this.errorFlag = false;
+    this.appService.getOriginalUrl(this.userUrl).subscribe({
+      next: data => {
+        (this.response = data), (this.outputUrl = this.response.result.url);
+      },
+      error: err => {
+        (this.errorMessage = err),
+          (this.errorFlag = true),
+          (this.flag = false),
+          (this.outputUrl = '');
+      }
     });
     this.userUrl = '';
   }

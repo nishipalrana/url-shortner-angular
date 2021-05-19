@@ -6,6 +6,11 @@
   align-items: center;
 }
 
+.alert {
+  margin-top: 1rem;
+  overflow: hidden;
+}
+
 .container {
   padding: 20px;
   display: flex;

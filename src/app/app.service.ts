@@ -1,6 +1,12 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpParams
+} from '@angular/common/http';
+import { error } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { OriginalUrlResponse } from './original-url-response';
 import { ResponseData } from './response';
 
@@ -15,19 +21,38 @@ export class AppService {
     const options = userUrl
       ? { params: new HttpParams().set('url', userUrl) }
       : {};
-    this.shortenedUrlReponse$ = this.http.get<ResponseData>(
-      this.baseUrl + 'shorten',
-      options
-    );
+    this.shortenedUrlReponse$ = this.http
+      .get<ResponseData>(this.baseUrl + 'shorten', options)
+      .pipe(catchError(this.handleError));
+
     return this.shortenedUrlReponse$;
   }
 
   getOriginalUrl(userUrl: string): Observable<OriginalUrlResponse> {
     let code = userUrl.substring(userUrl.lastIndexOf('/') + 1);
-    console.log(code);
 
     const options = code ? { params: new HttpParams().set('code', code) } : {};
-    return this.http.get<OriginalUrlResponse>(this.baseUrl + 'info', options);
+
+    this.originalUrlResponse$ = this.http
+      .get<OriginalUrlResponse>(this.baseUrl + 'info', options)
+      .pipe(catchError(this.handleError));
+
+    return this.originalUrlResponse$;
+  }
+
+  private handleError(err: HttpErrorResponse) {
+    console.log('In handle Error method');
+    console.log(err.error.error);
+    let errorMessage = '';
+
+    if (err.error instanceof ErrorEvent) {
+      errorMessage = `Error Occured: ${err.error.message}`;
+    } else {
+      errorMessage = `Error Occured: ${err.error.error} [HTTP Status]: ${
+        err.status
+      }`;
+    }
+    return throwError(errorMessage);
   }
 
   constructor(private http: HttpClient) {}
