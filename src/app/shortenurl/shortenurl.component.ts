@@ -8,7 +8,7 @@ import { ResponseData } from '../response';
   styleUrls: ['./shortenurl.component.css']
 })
 export class ShortenurlComponent {
-  userUrl: string;
+  userUrl: string = '';
   response: ResponseData;
   outputUrl: string;
   errorMessage: string;

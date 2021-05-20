@@ -9,7 +9,7 @@ import { ResponseData } from '../response';
   styleUrls: ['./originalurl.component.css']
 })
 export class OriginalurlComponent implements OnInit {
-  userUrl: string;
+  userUrl: string = '';
   response: OriginalUrlResponse;
   outputUrl: string;
   flag: boolean = false;

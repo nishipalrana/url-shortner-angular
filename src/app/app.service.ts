@@ -18,6 +18,9 @@ export class AppService {
   originalUrlResponse$: Observable<OriginalUrlResponse>;
 
   getShortenedUrl(userUrl: string): Observable<ResponseData> {
+    if(userUrl===''){
+      return throwError('Input cannot be blank');
+    }
     const options = userUrl
       ? { params: new HttpParams().set('url', userUrl) }
       : {};
@@ -29,6 +32,9 @@ export class AppService {
   }
 
   getOriginalUrl(userUrl: string): Observable<OriginalUrlResponse> {
+    if(userUrl===''){
+      return throwError('Input cannot be blank');
+    }
     let code = userUrl.substring(userUrl.lastIndexOf('/') + 1);
 
     const options = code ? { params: new HttpParams().set('code', code) } : {};
