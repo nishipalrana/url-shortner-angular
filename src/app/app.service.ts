@@ -17,6 +17,8 @@ export class AppService {
   shortenedUrlReponse$: Observable<ResponseData>;
   originalUrlResponse$: Observable<OriginalUrlResponse>;
 
+  outputUrls: string[] = [];
+
   getShortenedUrl(userUrl: string): Observable<ResponseData> {
     if (userUrl === '') {
       return throwError('Input cannot be blank');
@@ -59,6 +61,18 @@ export class AppService {
       }`;
     }
     return throwError(errorMessage);
+  }
+
+  saveLocalData(output: string[]) {
+    this.outputUrls.push(output[0]);
+    console.log('In saveLocalData' + this.outputUrls);
+    localStorage.setItem('outputUrlArr', JSON.stringify(this.outputUrls));
+  }
+
+  getLocalData(): string[] {
+    let result: string[] = JSON.parse(localStorage.getItem('outputUrlArr'));
+    console.log('In getLocalData' + result);
+    return result;
   }
 
   constructor(private http: HttpClient) {}

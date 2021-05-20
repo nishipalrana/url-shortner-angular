@@ -29,9 +29,11 @@ export class ShortenurlComponent {
     this.outputUrl = [];
     this.flag = false;
     this.errorFlag = false;
+    this.historyFlag = false;
   }
 
   showResponseUrl() {
+    this.outputUrl = [];
     this.flag = true;
     this.errorFlag = false;
     console.log(this.userUrl);
@@ -39,6 +41,7 @@ export class ShortenurlComponent {
       next: data => {
         (this.response = data),
           this.outputUrl.push(this.response.result.short_link),
+          this.appService.saveLocalData(this.outputUrl),
           this.outputUrl.push(this.response.result.short_link2),
           (this.flag = false);
       },
@@ -47,6 +50,13 @@ export class ShortenurlComponent {
       }
     });
     this.userUrl = '';
+  }
+
+  showHistory() {
+    this.outputUrl = [];
+    this.history = this.appService.getLocalData();
+    console.log('In show history' + this.history);
+    this.historyFlag = true;
   }
 
   constructor(private appService: AppService) {}
