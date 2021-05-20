@@ -10,21 +10,23 @@ import { ResponseData } from '../response';
 export class ShortenurlComponent {
   userUrl: string = '';
   response: ResponseData;
-  outputUrl: string;
+  outputUrl: string[] = [];
   errorMessage: string;
   flag: boolean = false;
   errorFlag: boolean = false;
+  history: string[] = [];
+  historyFlag: boolean = false;
 
-  onCopy() {
+  onCopy(url) {
     navigator.clipboard
-      .writeText(this.outputUrl)
+      .writeText(url)
       .then()
       .catch(e => console.error(e));
   }
 
   onReset() {
     this.userUrl = '';
-    this.outputUrl = '';
+    this.outputUrl = [];
     this.flag = false;
     this.errorFlag = false;
   }
@@ -36,7 +38,9 @@ export class ShortenurlComponent {
     this.appService.getShortenedUrl(this.userUrl).subscribe({
       next: data => {
         (this.response = data),
-          (this.outputUrl = this.response.result.short_link);
+          this.outputUrl.push(this.response.result.short_link),
+          this.outputUrl.push(this.response.result.short_link2),
+          (this.flag = false);
       },
       error: err => {
         (this.errorMessage = err), (this.errorFlag = true), (this.flag = false);
