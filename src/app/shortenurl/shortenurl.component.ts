@@ -36,6 +36,7 @@ export class ShortenurlComponent {
     this.outputUrl = [];
     this.flag = true;
     this.errorFlag = false;
+    this.historyFlag = false;
     console.log(this.userUrl);
     this.appService.getShortenedUrl(this.userUrl).subscribe({
       next: data => {
