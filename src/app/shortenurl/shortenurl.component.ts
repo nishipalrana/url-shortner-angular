@@ -40,14 +40,16 @@ export class ShortenurlComponent {
     console.log(this.userUrl);
     this.appService.getShortenedUrl(this.userUrl).subscribe({
       next: data => {
-        (this.response = data),
-          this.outputUrl.push(this.response.result.short_link),
-          this.appService.saveLocalData(this.outputUrl),
-          this.outputUrl.push(this.response.result.short_link2),
-          (this.flag = false);
+        this.response = data;
+        this.outputUrl.push(this.response.result.short_link);
+        this.appService.saveLocalData(this.outputUrl);
+        this.outputUrl.push(this.response.result.short_link2);
+        this.flag = false;
       },
       error: err => {
-        (this.errorMessage = err), (this.errorFlag = true), (this.flag = false);
+        this.errorMessage = err;
+        this.errorFlag = true;
+        this.flag = false;
       }
     });
     this.userUrl = '';

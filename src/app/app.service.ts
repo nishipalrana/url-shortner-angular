@@ -73,6 +73,8 @@ export class AppService {
     console.log('In getLocalData' + result);
     return result;
   }
-
-  constructor(private http: HttpClient) {}
+  private http: HttpClient;
+  constructor(http: HttpClient) {
+    this.http = http;
+  } //at start
 }
