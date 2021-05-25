@@ -9,7 +9,9 @@ import { catchError } from 'rxjs/operators';
 import { OriginalUrlResponse } from './original-url-response';
 import { ResponseData } from './response';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AppService {
   baseUrl: string = 'https://api.shrtco.de/v2/';
 
@@ -66,15 +68,17 @@ export class AppService {
     return throwError(errorMessage);
   }
 
-  saveLocalData(output: string[]) {
+  saveLocalData(output?: string[]) {
+    this.outputUrls = this.getLocalData();
     this.outputUrls.push(output[0]);
-    console.log('In saveLocalData' + this.outputUrls);
-    localStorage.setItem('outputUrlArr', JSON.stringify(this.outputUrls));
+
+    console.log('In saveLocalData : ' + this.outputUrls);
+    localStorage.setItem('outputUrlArray', JSON.stringify(this.outputUrls));
   }
 
   getLocalData(): string[] {
-    let result: string[] = JSON.parse(localStorage.getItem('outputUrlArr'));
-    console.log('In getLocalData' + result);
+    let result: string[] = JSON.parse(localStorage.getItem('outputUrlArray'));
+    console.log('In getLocalData : ' + result);
     return result;
   }
 }

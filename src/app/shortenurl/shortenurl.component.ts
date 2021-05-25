@@ -34,6 +34,7 @@ export class ShortenurlComponent {
 
   showResponseUrl() {
     this.history = [];
+    this.outputUrl = [];
     this.showSpinner = true;
     console.log(this.userUrl);
     this.appService.getShortenedUrl(this.userUrl).subscribe({
