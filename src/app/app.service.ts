@@ -69,16 +69,13 @@ export class AppService {
   }
 
   saveLocalData(output?: string[]) {
-    this.outputUrls = this.getLocalData();
+    this.outputUrls = this.getLocalData() ?? [];
     this.outputUrls.push(output[0]);
-
-    console.log('In saveLocalData : ' + this.outputUrls);
     localStorage.setItem('outputUrlArray', JSON.stringify(this.outputUrls));
   }
 
   getLocalData(): string[] {
     let result: string[] = JSON.parse(localStorage.getItem('outputUrlArray'));
-    console.log('In getLocalData : ' + result);
     return result;
   }
 }
