@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import { OriginalUrlResponse } from '../original-url-response';
-import { ResponseData } from '../response';
 
 @Component({
   selector: 'app-originalurl',
@@ -12,9 +11,10 @@ export class OriginalurlComponent implements OnInit {
   userUrl: string = '';
   response: OriginalUrlResponse;
   outputUrl: string;
-  flag: boolean = false;
-  errorFlag: boolean = false;
+  showSpinner: boolean = false;
   errorMessage: string;
+
+  constructor(private appService: AppService) {}
 
   onCopy() {
     navigator.clipboard
@@ -24,30 +24,28 @@ export class OriginalurlComponent implements OnInit {
   }
 
   onReset() {
-    this.userUrl = '';
-    this.outputUrl = '';
-    this.flag = false;
-    this.errorFlag = false;
+    this.userUrl = undefined;
+    this.outputUrl = undefined;
+    this.errorMessage = undefined;
+    this.showSpinner = false;
   }
 
   showResponseUrl() {
-    this.flag = true;
-    this.errorFlag = false;
+    this.showSpinner = true;
     this.appService.getOriginalUrl(this.userUrl).subscribe({
       next: data => {
-        (this.response = data), (this.outputUrl = this.response.result.url);
+        this.response = data;
+        this.outputUrl = this.response.result.url;
+        this.showSpinner = false;
       },
       error: err => {
-        (this.errorMessage = err),
-          (this.errorFlag = true),
-          (this.flag = false),
-          (this.outputUrl = '');
+        this.errorMessage = err;
+        this.showSpinner = false;
+        this.outputUrl = '';
       }
     });
-    this.userUrl = '';
+    this.userUrl = undefined;
   }
-
-  constructor(private appService: AppService) {}
 
   ngOnInit() {}
 }

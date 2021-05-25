@@ -8,14 +8,14 @@ import { ResponseData } from '../response';
   styleUrls: ['./shortenurl.component.css']
 })
 export class ShortenurlComponent {
-  userUrl: string = '';
+  userUrl: string;
   response: ResponseData;
   outputUrl: string[] = [];
   errorMessage: string;
-  flag: boolean = false;
-  errorFlag: boolean = false;
+  showSpinner: boolean = false;
   history: string[] = [];
-  historyFlag: boolean = false;
+
+  constructor(private appService: AppService) {}
 
   onCopy(url) {
     navigator.clipboard
@@ -25,18 +25,16 @@ export class ShortenurlComponent {
   }
 
   onReset() {
-    this.userUrl = '';
-    this.outputUrl = [];
-    this.flag = false;
-    this.errorFlag = false;
-    this.historyFlag = false;
+    this.userUrl = undefined;
+    this.errorMessage = undefined;
+    this.outputUrl.length = 0;
+    this.showSpinner = false;
+    this.history = [];
   }
 
   showResponseUrl() {
-    this.outputUrl = [];
-    this.flag = true;
-    this.errorFlag = false;
-    this.historyFlag = false;
+    this.history = [];
+    this.showSpinner = true;
     console.log(this.userUrl);
     this.appService.getShortenedUrl(this.userUrl).subscribe({
       next: data => {
@@ -44,12 +42,11 @@ export class ShortenurlComponent {
         this.outputUrl.push(this.response.result.short_link);
         this.appService.saveLocalData(this.outputUrl);
         this.outputUrl.push(this.response.result.short_link2);
-        this.flag = false;
+        this.showSpinner = false;
       },
       error: err => {
         this.errorMessage = err;
-        this.errorFlag = true;
-        this.flag = false;
+        this.showSpinner = false;
       }
     });
     this.userUrl = '';
@@ -58,9 +55,5 @@ export class ShortenurlComponent {
   showHistory() {
     this.outputUrl = [];
     this.history = this.appService.getLocalData();
-    console.log('In show history' + this.history);
-    this.historyFlag = true;
   }
-
-  constructor(private appService: AppService) {}
 }

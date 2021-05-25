@@ -15,11 +15,15 @@ export class AppService {
 
   shortenedUrlReponse$: Observable<ResponseData>;
   originalUrlResponse$: Observable<OriginalUrlResponse>;
-
   outputUrls: string[] = [];
+  //The explicit way of writing private http: HttpClient
+  private http: HttpClient;
+  constructor(http: HttpClient) {
+    this.http = http;
+  }
 
-  getShortenedUrl(userUrl: string): Observable<ResponseData> {
-    if (userUrl === '') {
+  getShortenedUrl(userUrl?: string): Observable<ResponseData> {
+    if (!userUrl) {
       return throwError('Input cannot be blank');
     }
     const options = userUrl
@@ -32,8 +36,8 @@ export class AppService {
     return this.shortenedUrlReponse$;
   }
 
-  getOriginalUrl(userUrl: string): Observable<OriginalUrlResponse> {
-    if (userUrl === '') {
+  getOriginalUrl(userUrl?: string): Observable<OriginalUrlResponse> {
+    if (!userUrl) {
       return throwError('Input cannot be blank');
     }
     let code = userUrl.substring(userUrl.lastIndexOf('/') + 1);
@@ -73,8 +77,4 @@ export class AppService {
     console.log('In getLocalData' + result);
     return result;
   }
-  private http: HttpClient;
-  constructor(http: HttpClient) {
-    this.http = http;
-  } //at start
 }

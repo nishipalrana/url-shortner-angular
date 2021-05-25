@@ -8,7 +8,7 @@
 
   <div class="alert alert-warning" role="alert" *ngIf="errorMessage">
     {{errorMessage}}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <button type="button" class="btn-close" (click)="onReset()"></button>
   </div>
 
   <div class="button-group">
@@ -25,9 +25,9 @@
     </button>
   </div>
 
-  <div *ngIf="flag" class="spinner-border text-warning m-5" role="status"></div>
+  <div *ngIf="showSpinner" class="spinner-border text-warning m-5" role="status"></div>
 
-  <div *ngIf="historyFlag">
+  <div *ngIf="history">
     <div class="card" *ngFor="let hist of history">
       <h6>{{hist}}</h6>
 
