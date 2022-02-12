@@ -11,7 +11,7 @@ import { OriginalurlComponent } from './originalurl/originalurl.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { RouterModule } from '@angular/router';
-
+import {APP_BASE_HREF} from '@angular/common';
 const routes = [
   { path: 'home', component: HomeComponent },
   { path: 'shortenUrl', component: ShortenurlComponent },
@@ -38,6 +38,6 @@ const routes = [
     AboutComponent
   ],
   bootstrap: [AppComponent],
-  providers: [AppService]
+  providers: [AppService,{provide: APP_BASE_HREF, useValue: '/'}]
 })
 export class AppModule {}
